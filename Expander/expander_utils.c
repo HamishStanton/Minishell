@@ -6,81 +6,83 @@
 /*   By: hstanton <hstanton@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 17:17:17 by hstanton          #+#    #+#             */
-/*   Updated: 2023/07/29 18:50:56 by hstanton         ###   ########.fr       */
+/*   Updated: 2023/07/30 17:02:14 by hstanton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "builtins.h"
 
-size_t  dollar_sign(char *str)
+size_t	dollar_sign(char *str)
 {
-    size_t  i;
+	size_t	i;
 
-    i = 0;
-    while (str[i])
-    {
-        if (str[i] == '$')
-            return (i + 1);
-        i++;
-    }
-    return (0);
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '$')
+			return (i + 1);
+		i++;
+	}
+	return (0);
 }
 
-char    *char_to_str(char c)
+char	*char_to_str(char c)
 {
-    char    *str;
+	char	*str;
 
-    str = ft_calloc(sizeof(char), 2);
-    str[0] = c;
-    return (str);
+	str = ft_calloc(sizeof(char), 2);
+	str[0] = c;
+	return (str);
 }
 
-int after_dol_length(char *str, int j)
+int	after_dol_length(char *str, int j)
 {
-    int i;
+	int	i;
 
-    i = j + 1;
-    while (str[i] != '\0' && str[i] != '$' && str[i] != ' ' && str[i] != '\"' && str[i] != '\'' && str[i] != '=' && str[i] != '-' && str[i] != ':')
-        i++;
-    return (i);
+	i = j + 1;
+	while (str[i] != '\0' && str[i] != '$' && str[i] != ' '
+		&& str[i] != '\"' && str[i] != '\'' && str[i] != '='
+		&& str[i] != '-' && str[i] != ':')
+		i++;
+	return (i);
 }
 
-size_t quotes_length(char *str)
+size_t	quotes_length(char *str)
 {
-    int     i;
-    size_t  ret;
+	int		i;
+	size_t	ret;
 
-    i = 0;
-    ret = 0;
-    while (str[i])
-    {
-        if (str[i] == '\'' || str[i] == '\"')
-        {
-            ret++;
-        }
-        i++;
-    }
-    return (ret);
+	i = 0;
+	ret = 0;
+	while (str[i])
+	{
+		if (str[i] == '\'' || str[i] == '\"')
+		{
+			ret++;
+		}
+		i++;
+	}
+	return (ret);
 }
 
-char    *delete_quotes(char *str, char c)
+char	*delete_quotes(char *str, char c)
 {
-    int i;
-    int j;
+	int	i;
+	int	j;
 
-    i = 0;
-    j = 0;
-    while (str[i])
-    {
-        if (str[i] == c)
-        {
-            j = 0;
-            while (str[i + j] == c)
-                j++;
-            ft_strlcpy(&str[i], &str[i + j], strlen(str) - i);
-        }
-        i++;
-    }
-    return (str);
+	i = 0;
+	j = 0;
+	while (str[i])
+	{
+		if (str[i] == c)
+		{
+			j = 0;
+			while (str[i + j] == c)
+				j++;
+			ft_strlcpy(&str[i], &str[i + j], strlen(str) - i);
+		}
+		i++;
+	}
+	return (str);
 }
